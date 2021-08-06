@@ -1,8 +1,10 @@
+---
 layout: post
 title: "Python Code - Circular area around point on map"
 date: 2021-08-06
 categories: python proxy
 permalink: /circle-map/
+---
 
 Context: Comparing single points (e.g. proxy data) to circular (or rectangular) areas (from the field output from model) around each point. 
 {% highlight python %}
