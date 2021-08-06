@@ -5,7 +5,7 @@ categories: python proxy
 permalink: /circle-map/
 
 Context: Comparing single points (e.g. proxy data) to circular (or rectangular) areas (from the field output from model) around each point. 
-
+{% highlight python %}
     datlist=list([0,1,2,3,4,5,6,8])
     lats=range(58,126) #lats over domain
     lons=list(range(270,288))+ list(range(0,73)) #lon over domain
@@ -37,4 +37,5 @@ Context: Comparing single points (e.g. proxy data) to circular (or rectangular) 
         arr = np.where(cdat[0].OCNFRAC[0,lats,lons]<0.7,arr,0) # take only the points which have some land
         arr = np.where(arr==0,np.nan,1)
         circles.append(arr)
+ {% endhighlight %}
 
