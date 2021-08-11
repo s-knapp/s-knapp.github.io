@@ -8,36 +8,72 @@ permalink: /circle-map/
 
 Context: Comparing single points (e.g. proxy data) to circular (or rectangular) areas (from the field output from model) around each point. 
 {% highlight python %}
-    datlist=list([0,1,2,3,4,5,6,8])
-    lats=range(58,126) #lats over domain
-    lons=list(range(270,288))+ list(range(0,73)) #lon over domain
-    circles=[]
+    #this won't wrap at all at edges of map!
 
-    #this finds circular areas on land within X km of a point
-    for i in (datlist): #for each single point/proxy datum
+circles=[]
+modellons=lon ###assumes 0-360###
+modellats=lat 
 
-        arr=np.zeros((len(lats),len(lons))) #domain of zeroes 
-        originlat=lw['Lat'][datlist][i] #circle center lat
-        originlon=lw["Long"][datlist][i] #circle center lon
-        eradius=6371 #earth radius km
-        cradius=600 #circle radius km 
+originlat=lat_eocene  #circle center (data) lats
+originlon=lon_eocene  #circle center (data) lons
 
-        #specify different radii for some points
-        if i==5: #larger radii for W african wind deposited 
-            cradius=1100 
 
-        # r*dtheta = arc length
-        degradius= cradius/eradius * 180/np.pi #get the radius of circle in degrees
+if modellats.max() >90:
+    modellats[:]-=90
+if originlat.max() >90:
+    originlat[:]-=90
+cradius=300 #circle radius km 
 
-        if i==4: #make a rectangle for this point
-            masklat = abs((cdat[0].lat[lats]-originlat)) < 6 # +/- 6 deg lat
-            masklon = abs(((cdat[0].lon[lons]- 180) % 360) - 180 -originlon)<25 # +/- 25 deg lon
-            arr[masklat & masklon] = 1
-        else:
-            mask = (((cdat[0].lon[lons]- 180) % 360) - 180 -originlon)**2 + abs(np.cos(cdat[0].lat[lats] * np.pi/180))*(cdat[0].lat[lats]-originlat)**2 < degradius**2 # find all points whose distance (in degrees) is less than the radius
-            arr[mask.T] = 1
-        arr = np.where(cdat[0].OCNFRAC[0,lats,lons]<0.7,arr,0) # take only the points which have some land
-        arr = np.where(arr==0,np.nan,1)
-        circles.append(arr)
+eradius=6371 #earth radius km
+
+def find_nearest(modelcoords, datacoord): #return index of model coord nearest to data coord
+    array = np.asarray(modelcoords)
+    idx = (np.abs(modelcoords - datacoord)).argmin()
+    return idx
+    
+def coord_separation(coord):
+    dist=coord[1]-coord[0]
+    return dist
+    
+    
+#this finds circular areas on land within X km of a point
+for i in range(len(eocenepr_avg)):
+    arr=np.zeros((len(lat),len(lon))) #domain of zeroes
+    
+    # r*dtheta = arc length
+    degradius= cradius/eradius * 180/np.pi #get the radius of circle in degrees
+    
+    #TAKE ONLY THE MODEL COORDS WITHIN degradius OF ORIGIN COORDS
+    
+    lat_max= int(find_nearest(modellats,originlat[i]) + math.ceil(degradius/coord_separation(modellats)) )
+    if lat_max > len(modellats)-1:
+        lat_max=len(modellats)-1
+    lat_min= int(find_nearest(modellats,originlat[i]) - math.ceil(degradius/coord_separation(modellats)) )
+    if lat_min < -90:
+        lat_min=math.ceil( modellats.min() )
+    lon_max= int(find_nearest(modellons,originlon[i]) + math.ceil(degradius/coord_separation(modellons)) )
+    if lon_max > len(modellons)-1:
+        lon_max=len(modellons)-1
+    lon_min= int(find_nearest(modellons,originlon[i]) - math.ceil(degradius/coord_separation(modellons)) )
+    if lon_min < 0:
+        lon_min=0
+    
+    #make boolean mask; true if within radius, else false
+    mask=np.empty((len(modellat),len(modellon)),dtype=bool)
+    mask[:,:]=False
+    for la in range(lat_min,lat_max):
+        for lo in range(lon_min,lon_max):
+            if (modellons[lo] -originlon[i])**2 + (modellats[la]-originlat[i])**2 < degradius**2:
+                mask[la,lo]=True # find all points whose distance (in degrees) is less than the radius
+    arr[mask] = 1
+    
+    #arr = np.where(cdat[0].OCNFRAC[0,lats,lons]<0.7,arr,0)
+    arr = np.where(arr==0,np.nan,1)
+    circles.append(arr)
+    plt.contourf(modellons,modellats,arr,levels=[0,1],colors='none' ,hatches=['\\\\'])
+
+# fig,ax=plt.subplots(1)
+# ax.set_aspect('equal')  #circles appear distorted if you don't make axes proportional
+# ax.contourf(circles[123])
  {% endhighlight %}
 
