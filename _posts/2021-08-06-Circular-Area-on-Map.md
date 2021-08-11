@@ -6,7 +6,12 @@ categories: python proxy
 permalink: /circle-map/
 ---
 
-Context: Comparing single points (e.g. proxy data) to circular (or rectangular) areas (from the field output from model) around each point. 
+Context: Comparing single points (e.g. proxy data) to circular areas (from the field output from model) around each point. 
+Instructions: modellats/lons - vectors of the lat/lon your model output uses.
+              originlat/lon  - vectors of the lat/lon for each proxy data point, to be the center of each circle
+              cradius        - the radius of the circles around each originlat/lon point
+              circles        - the list which will contain your circles. circle area marked as 1's, all else NaN.
+              
 {% highlight python %}
     #this won't wrap at all at edges of map!
 
@@ -18,10 +23,11 @@ originlat=lat_eocene  #circle center (data) lats
 originlon=lon_eocene  #circle center (data) lons
 
 
-if modellats.max() >90:
+if modellats.max() >90: #convert both model and proxy lats to -90,90
     modellats[:]-=90
 if originlat.max() >90:
     originlat[:]-=90
+    
 cradius=300 #circle radius km 
 
 eradius=6371 #earth radius km
@@ -43,7 +49,7 @@ for i in range(len(eocenepr_avg)):
     # r*dtheta = arc length
     degradius= cradius/eradius * 180/np.pi #get the radius of circle in degrees
     
-    #TAKE ONLY THE MODEL COORDS WITHIN degradius OF ORIGIN COORDS
+    #TAKE ONLY THE MODEL COORDS WITHIN degradius OF ORIGIN COORDS (speeds calculation way up)
     
     lat_max= int(find_nearest(modellats,originlat[i]) + math.ceil(degradius/coord_separation(modellats)) )
     if lat_max > len(modellats)-1:
@@ -67,13 +73,14 @@ for i in range(len(eocenepr_avg)):
                 mask[la,lo]=True # find all points whose distance (in degrees) is less than the radius
     arr[mask] = 1
     
-    #arr = np.where(cdat[0].OCNFRAC[0,lats,lons]<0.7,arr,0)
+    #arr = np.where(cdat[0].OCNFRAC[0,lats,lons]<0.7,arr,0) #I was filtering to only include areas over land
     arr = np.where(arr==0,np.nan,1)
     circles.append(arr)
     plt.contourf(modellons,modellats,arr,levels=[0,1],colors='none' ,hatches=['\\\\'])
-
-# fig,ax=plt.subplots(1)
-# ax.set_aspect('equal')  #circles appear distorted if you don't make axes proportional
-# ax.contourf(circles[123])
+    
+#debugging plot
+#fig,ax=plt.subplots(1)
+#ax.set_aspect('equal')  #circles appear distorted if you don't make axes proportional
+#ax.contourf(circles[123])
  {% endhighlight %}
 
