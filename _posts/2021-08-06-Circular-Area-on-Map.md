@@ -6,11 +6,12 @@ categories: python proxy
 permalink: /circle-map/
 ---
 
-Context: Comparing single points (e.g. proxy data) to circular areas (from the field output from model) around each point. 
-Instructions: modellats/lons - vectors of the lat/lon your model output uses.
-              originlat/lon  - vectors of the lat/lon for each proxy data point, to be the center of each circle
-              cradius        - the radius of the circles around each originlat/lon point
-              circles        - the list which will contain your circles. circle area marked as 1's, all else NaN.
+<p>Context: <br>Comparing single points (e.g. proxy data) to circular areas (from the field output from model) around each point. <br><br>
+Instructions: <br>modellats/lons - vectors of the lat/lon your model output uses.<br>
+              originlat/lon  - vectors of the lat/lon for each proxy data point, to be the center of each circle<br>
+              cradius        - the radius of the circles around each originlat/lon point<br>
+              circles        - the list which will contain your circles. circle area marked as 1's, all else NaN.<br>
+</p>
               
 {% highlight python %}
     #this won't wrap at all at edges of map!
