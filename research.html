@@ -65,6 +65,26 @@ e<!DOCTYPE html>
         .clear {
             clear: both;
         }
+
+        .image-container {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+        
+        .image-container img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .image-caption {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -78,15 +98,30 @@ e<!DOCTYPE html>
     </nav>
     <div class="container">
         <h2>Climate Data Insights</h2>
+        <div class="image-container">
         <img src="Picture1.png" alt="Example Left" class="image-left">
+        <div class="image-caption">This caption text will not extend beyond the image width and will wrap nicely if it's longer than the image.</div>
+    </div>
+        
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum auctor, lorem id egestas vestibulum, velit nulla ullamcorper elit, a interdum magna libero id turpis. Integer sit amet purus eu quam vestibulum ultrices. Nullam ut lorem eu ipsum sollicitudin venenatis. Duis fringilla ullamcorper neque, sed tincidunt nunc facilisis ac.</p>
         
-        <img src="Picture3.png" alt="Example Right" class="image-right">
+        <div class="image-container">
+        <img src="Picture3.png" alt="Another Example" class="image-right">
+        <div class="image-caption">Short caption</div>
+    </div>
         <p>Phasellus eget orci at elit dictum efficitur. Praesent tempor urna at lacus tempor, nec volutpat purus ultrices. Suspendisse potenti. Aliquam erat volutpat. Etiam facilisis scelerisque nulla non venenatis. Integer efficitur nisi ut libero sodales, vel tincidunt lectus faucibus. In hac habitasse platea dictumst.</p>
 
-        <img src="Picture4.png" alt="Example Right" class="image-left">
+        <div class="image-container">
+        <img src="Picture3.png" alt="Third Example" class="image-left">
+        <div class="image-caption">This is a longer caption that demonstrates how the text wraps within the bounds of the image above it, maintaining proper alignment.</div>
+    </div>
 
-        <img src="Picture5.png" alt="Example Right" class="image-left">
+        <p>Curabitur vehicula, metus at bibendum facilisis, justo risus aliquet libero, nec efficitur dui lacus at dui. Vivamus at arcu dolor. Fusce id quam velit. Donec vitae sapien non lectus blandit lacinia. Aliquam erat volutpat. Suspendisse potenti.</p>
+        
+        <div class="image-container">
+        <img src="Picture5.png" alt="Third Example" class="image-left">
+        <div class="image-caption">This is a longer caption that demonstrates how the text wraps within the bounds of the image above it, maintaining proper alignment.</div>
+    </div>
         
         <div class="clear"></div>
         <p>Curabitur vehicula, metus at bibendum facilisis, justo risus aliquet libero, nec efficitur dui lacus at dui. Vivamus at arcu dolor. Fusce id quam velit. Donec vitae sapien non lectus blandit lacinia. Aliquam erat volutpat. Suspendisse potenti.</p>
