@@ -102,38 +102,44 @@ e<!DOCTYPE html>
 
         <p>For part of my dissertation, I developed a simplified box model of the uppermost layers of the Pacific Ocean. This box model was computationally cheap to run, which allowed us to run far more permutations than we could using a state-of-the-art climate model. 
             We tested the sensitivity of large-scale upper ocean temperature gradients to the radiative feedback parameters (λ) in different regions of the Pacific with abrupt greenhouse gas forcing. This offered unique plotting challenges, as we could not simply plot our results on a global map.
-        For presentation purposes, I found that plots like the ones below were often far too information dense and not clear to audiences. Stripped down versions which highlighted a few examples were more beneficial for getting across specific results. 
-            However, after staring at these plots for far too long, I've come to appreciate the information density, given that I already know exactly what is being shown. </p>
+        The plots shown below are meant to serve as somewhat extreme examples of different styles of plotting large, complex data sets; I am not trying to explain the detailed interpretations of each figure here. 
+            For presentation purposes, I found that plots like the ones below were often far too information dense and not clear to audiences. Stripped down versions which highlighted a few examples were more beneficial for getting across specific results. 
+            However, after staring at these plots for far too long, I've come to appreciate their information density :) </p>
         
         <div class="image-container">
         <img src="fig2-7.png" alt="Example Left" class="image-left">
-        <div class="image-caption">1296 simulations from a simple box model of the Pacific Ocean. As each simulation progresses, the temperatures in the boxes change, moving them away from the origin. 
+        <div class="image-caption"> (a) 1296 simulations from a simple box model of the Pacific Ocean. As each simulation progresses, the temperatures in the boxes change, moving them away from the origin. 
             The evolution of anomalous temperature differences between the West and East boxes is on the X axis, while the difference between the tropical and subtropical boxes is the Y axis. 
-            The unique model parameters that define each simulation are shown by the colored shapes at the end of each line.</div>
+            The unique model parameters that define each simulation are shown by the colored shapes at the end of each line. (b) shows the x-axis data of the colored lines in (a), and (c) shows the y-axis data of the colored lines in (a).</div>
     </div>
         
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum auctor, lorem id egestas vestibulum, velit nulla ullamcorper elit, a interdum magna libero id turpis. Integer sit amet purus eu quam vestibulum ultrices. Nullam ut lorem eu ipsum sollicitudin venenatis. Duis fringilla ullamcorper neque, sed tincidunt nunc facilisis ac.</p>
+        <p></p>
         
         <div class="image-container">
         <img src="regimefigure.png" alt="Another Example" class="image-right">
-        <div class="image-caption">Short caption</div>
+        <div class="image-caption">Final temperature gradient changes, colors indicate what regime each λ configuration is in. (b) Gradients of λ for each λ configuration for each regime. 
+            Regimes are delineated by dashed grey lines. Stars indicate example model configurations which were shown as the colored lines in the previous figure. </div>
     </div>
-        <p>Phasellus eget orci at elit dictum efficitur. Praesent tempor urna at lacus tempor, nec volutpat purus ultrices. Suspendisse potenti. Aliquam erat volutpat. Etiam facilisis scelerisque nulla non venenatis. Integer efficitur nisi ut libero sodales, vel tincidunt lectus faucibus. In hac habitasse platea dictumst.</p>
+        
 
-        <div class="image-container">
-        <img src="Picture3.png" alt="Third Example" class="image-left">
-        <div class="image-caption">This is a longer caption that demonstrates how the text wraps within the bounds of the image above it, maintaining proper alignment.</div>
-    </div>
-
-        <p>Curabitur vehicula, metus at bibendum facilisis, justo risus aliquet libero, nec efficitur dui lacus at dui. Vivamus at arcu dolor. Fusce id quam velit. Donec vitae sapien non lectus blandit lacinia. Aliquam erat volutpat. Suspendisse potenti.</p>
+        <p>My first published work involved running a climate model (CESM1.2) with different boundary conditions meant to represent the Pliocene epoch and comparing the resulting output in a few places to samples collected in the real world. 
+            However, before doing that comparison, we wanted to establish how well the climate model did compared to real world samples which represent the present day climate. This was an important step to establish credibility for our results. 
+            The full paper is available for anyone to read at https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021PA004401. </p>
         
         <div class="image-container">
         <img src="Picture5.png" alt="Third Example" class="image-left">
-        <div class="image-caption">Model data comparison using a water isotope enabled version of CAM5, an observational precipitation product from CHPclim and water isotope observations from GNIP station data. (a)-(d) Seasonal precipitation and average 850-1000 hPa wind in a pre-industrial control (PIC) simulation. (e)-(h) Seasonal precipitation in the PIC minus CHPclim. (i)-(l) Colored contours show seasonal 𝛿Dp in the PIC, colored circles show seasonal 𝛿Dp from GNIP station data.</div>
+        <div class="image-caption">Model data comparison using a water isotope enabled version of CAM5, an observational precipitation product from CHPclim and water isotope observations from GNIP station data. 
+            (a)-(d) Seasonal precipitation and average 850-1000 hPa wind in a pre-industrial control (PIC) simulation. (e)-(h) Seasonal precipitation in the PIC minus CHPclim. (i)-(l) Colored contours show seasonal 𝛿Dp in the PIC, colored circles show seasonal 𝛿Dp from GNIP station data.</div>
     </div>
         
         <div class="clear"></div>
-        <p>Curabitur vehicula, metus at bibendum facilisis, justo risus aliquet libero, nec efficitur dui lacus at dui. Vivamus at arcu dolor. Fusce id quam velit. Donec vitae sapien non lectus blandit lacinia. Aliquam erat volutpat. Suspendisse potenti.</p>
+        <p>After establishing that the climate model produced reasonable results, we compared our Pliocene experiments to real world samples which represent the same quantity we modeled, from the same time periods millions of years ago. 
+            The location where the samples were collected doesn't always represent where they were in the Pliocene epoch, so we had to estimate regions that we thought could have contributed material to the sample (hashed regions in plots below). 
+            We averaged the model output (shaded colors) in those estimated regions and compared them to the real world sample values (colored dots).</p>
+    </div>
+    <div class="image-container">
+        <img src="modeldatacomp.png" alt="Third Example" class="image-left">
+        <div class="image-caption">Climate model output (shaded colors) is compared to real world samples (colored dots) of the same quantity for two time periods, (a) the early Pliocene and (b) the late Pliocene. </div>
     </div>
 </body>
 </html>
